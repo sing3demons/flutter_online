@@ -5,14 +5,29 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> msg = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('เกี่ยวกับเรา'),
       ),
       body: Center(
         child: Column(
-          children: const <Widget>[
-            Text('this is About page'),
+          children: <Widget>[
+            Divider(),
+            Text('email: ${msg['email']} age: ${msg['age']}'),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, 'About Page');
+              },
+              child: Text('home'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/contact');
+              },
+              child: Text('contact'),
+            ),
           ],
         ),
       ),

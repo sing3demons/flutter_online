@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var formAbout;
 
   @override
   Widget build(BuildContext context) {
@@ -11,12 +18,28 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/about');
-                },
-                child: Text('back'))
+              onPressed: () async {
+                formAbout =
+                    await Navigator.pushNamed(context, '/about', arguments: {
+                  'email': 'sing@dev.com',
+                  'age': 24,
+                });
+                setState(() {
+                  formAbout = formAbout;
+                });
+              },
+              child: Text('about'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/contact');
+              },
+              child: Text('contact'),
+            ),
+            Text('form about ${formAbout ?? ''}'),
           ],
         ),
       ),
